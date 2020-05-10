@@ -1,0 +1,26 @@
+
+zuul:
+  routes:
+    profile:
+      path: /profile/**
+      service-id: profile
+      stripPrefix: false 
+    login:
+      path: /login/**
+      service-id: login
+      stripPrefix: false
+    property:
+      path: /property/**
+      service-id: property
+      stripPrefix: false 
+    buyorsell:
+      path: /buyorsell/**
+      service-id: buyorsell
+      stripPrefix: false
+    analysis:
+      path: /analysis/**
+      service-id: analysis
+      stripPrefix: false  
+              
+
+      
