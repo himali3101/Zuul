@@ -1,26 +1,22 @@
-
 zuul:
   routes:
     profile:
       path: /profile/**
-      service-id: profile
+      url: "http://localhost:9003/profile/"
       stripPrefix: false 
     login:
       path: /login/**
-      service-id: login
+      serviceId: login
       stripPrefix: false
     property:
       path: /property/**
-      service-id: property
+      serviceId : property 
       stripPrefix: false 
     buyorsell:
-      path: /buyorsell/**
-      service-id: buyorsell
+      path: /buyorsell/*
+      serviceId: buyorsell
       stripPrefix: false
     analysis:
-      path: /analysis/**
-      service-id: analysis
-      stripPrefix: false  
-              
-
-      
+      path: /analysis/*
+      serviceId: analysis
+      stripPrefix: false
