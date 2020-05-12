@@ -1,22 +1,19 @@
 zuul:
+  sensitive-headers: Cookie, Set-Cookie
   routes:
     profile:
       path: /profile/**
       url: "http://localhost:9003/profile/"
-      stripPrefix: false 
     login:
       path: /login/**
       serviceId: login
-      stripPrefix: false
+      stripPrefix: false 
     property:
       path: /property/**
       serviceId : property 
-      stripPrefix: false 
     buyorsell:
       path: /buyorsell/*
       serviceId: buyorsell
-      stripPrefix: false
     analysis:
       path: /analysis/*
       serviceId: analysis
-      stripPrefix: false
