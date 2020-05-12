@@ -14,18 +14,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	JwtRequestFilter jwtRequestFilter;
-	
+	   
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
-		http.csrf().disable()
+		http.csrf().disable().cors().disable()
 		.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/login/authenticate").hasAuthority("ADMIN")
 		.antMatchers("/login/authenticate").permitAll()
-		.antMatchers("/login/signup").hasAuthority("ADMIN")
+		.antMatchers("/login/signup").permitAll()
+		.antMatchers("/property/**").permitAll()
+		.antMatchers("/buyorsell/add").permitAll()
+		.antMatchers("/profile/**").permitAll()
 		.and()
-		.sessionManagement()
+		.sessionManagement() 
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
