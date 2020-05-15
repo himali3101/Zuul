@@ -32,25 +32,25 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 
-		final String authorizationHeader = request.getHeader("Authorization"); // Extracting AUthorization Header
+		final String authorizationHeader = request.getHeader("Authorization"); 
 		
 		String username = null;
         String jwt = null;
         String role = null;
 
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {  // if the header starts with Bearer then it's a JWT based Authorization
-            jwt = authorizationHeader.substring(7); // remove the first 7 characters which are "Bearer ", which leaves you with the jwt token
-            username = jwtUtil.extractUsername(jwt); // it's extracting username
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {  
+            jwt = authorizationHeader.substring(7); 
+            username = jwtUtil.extractUsername(jwt); 
             role = jwtUtil.extractRoles(jwt);
         }
         
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username); // if there's actually a user in my db
-            																				// this is again not a microservice appoach
-            																				// I will just comment it out at the 2 hrs meetings
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username); 
+            																				
+            																				
 
-            if (jwtUtil.validateToken(jwt, userDetails)) { // if the jwt is not expired, and if there is actually a user with the same name in the db. Stupid Appraoch ://
+            if (jwtUtil.validateToken(jwt, userDetails)) { 
             	
             	// Generating a  new authority
             	List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
@@ -68,7 +68,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-        chain.doFilter(request, response); // let this code block be copied and pasted for working conditions
+        chain.doFilter(request, response); 
 
 	}
 
